@@ -1,22 +1,19 @@
 namespace SimurghEngine.API.Entities.CMS
 {
-    public class Article
+    public class ImageGroup
     {
         [key]
-        public int articleId { get; set; }
+        public int imageGroupId { get; set; }
         public string titleEn { get; set; }
         public string titleFa { get; set; }
-        public string content { get; set; }
-        public string metaDesc { get; set; }    
-        public string summary { get; set; }
+        public string desc { get; set; }
         public date createDate { get; set; }
-        public date modifiedDate { get; set; }
-        public bool isDeleted { get; set; }
-
+        public string modifiedDate { get; set; }
 
 
         public AppUser creatorUserId { get; set; }
         public AppUser editorUserId { get; set; }
+        
 
     }
 }
