@@ -14,8 +14,8 @@ namespace SimurghEngine.API.Entities.CMS
         public bool isDeleted { get; set; }
 
 
-        public AppUser creatorUserId { get; set; }
-        public AppUser editorUserId { get; set; }
+        public virtual AppUser creatorUserId { get; set; }
+        public virtual AppUser editorUserId { get; set; }
 
         
     }

@@ -21,11 +21,11 @@ namespace SimurghEngine.API.Entities.CMS
         public string lastLoginIp { get; set; }
         
 
-        public Image appUserImage { get; set; }
-        public Role role { get; set; }
-        public List<Article> articles { get; set; }
-        public List<KeyWord> keyWords { get; set; }
-        public List<Image>  images { get; set; }
+        public virtual Image appUserImage { get; set; }
+        public virtual Role role { get; set; }
+        public virtual List<Article> articles { get; set; }
+        public virtual List<KeyWord> keyWords { get; set; }
+        public virtual List<Image>  images { get; set; }
         public List<ArticleGroup> articleGroups { get; set; }
         public List<ImageGroup> imageGroups { get; set; }
 

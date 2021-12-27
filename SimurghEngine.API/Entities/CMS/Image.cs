@@ -16,8 +16,8 @@ namespace SimurghEngine.API.Entities.CMS
         
         
 
-        public List<AppUser> appUsers { get; set; }
-        public AppUser creatorUserId { get; set; }
-        public AppUser editorUserId { get; set; }
+        public virtual List<AppUser> appUsers { get; set; }
+        public virtual AppUser creatorUserId { get; set; }
+        public virtual AppUser editorUserId { get; set; }
     }
 }

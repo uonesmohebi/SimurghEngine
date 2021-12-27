@@ -14,6 +14,6 @@ namespace SimurghEngine.API.Data
         {
         }
 
-        public DbSet<AppUser> AppUsers { get; set; }
+        public virtual DbSet<AppUser> AppUsers { get; set; }
     }
 }
