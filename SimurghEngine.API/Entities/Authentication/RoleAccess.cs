@@ -7,7 +7,8 @@ namespace SimurghEngine.API.Entities.CMS
         [Key]
         public int roleAccessId { get; set; }
         public string titleEn { get; set; }
-        public string titleFa { get; set; }
+        public string? titleFa { get; set; }
+        public string? desc { get; set; }
         
     }
 }

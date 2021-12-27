@@ -6,11 +6,12 @@ namespace SimurghEngine.API.Entities.CMS
     {
         [Key]
         public int articleGroupId { get; set; }
+        public int parentGroupId { get; set; }
         public string titleEn { get; set; }
-        public string titleFa { get; set; }
-        public string desc { get; set; }
+        public string? titleFa { get; set; }
+        public string? desc { get; set; }
         public DateTime createDate { get; set; }
-        public DateTime modifiedDate { get; set; }
+        public DateTime? modifiedDate { get; set; }
 
 
         public virtual AppUser creatorUserId { get; set; }
