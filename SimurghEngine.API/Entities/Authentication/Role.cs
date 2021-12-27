@@ -1,8 +1,10 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace SimurghEngine.API.Entities.CMS
 {
     public class Role
     {
-        [key]
+        [Key]
         public int roleId { get; set; }
         public string titleEn { get; set; }
         public string titleFa { get; set; }
@@ -10,6 +12,6 @@ namespace SimurghEngine.API.Entities.CMS
         
 
 
-        public list<AppUser> appusers { get; set; }
+        public List<AppUser> appusers { get; set; }
     }
 }

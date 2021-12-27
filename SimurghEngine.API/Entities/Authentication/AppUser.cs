@@ -1,8 +1,10 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace SimurghEngine.API.Entities.CMS
 {
     public class AppUser
     {
-        [key]
+        [Key]
         public int appUserId { get; set; }
         public string userName { get; set; }
         public string alias { get; set; }
@@ -14,18 +16,18 @@ namespace SimurghEngine.API.Entities.CMS
         public string mobileNumber { get; set; }
         public string mobileActivation { get; set; }
         public bool mobileIsActive { get; set; }
-        public date createDate { get; set; }
-        public date lastLoginDate { get; set; }
+        public DateTime createDate { get; set; }
+        public DateTime lastLoginDate { get; set; }
         public string lastLoginIp { get; set; }
         
 
-        public image appUserImage { get; set; }
+        public Image appUserImage { get; set; }
         public Role role { get; set; }
-        public list<Article> articles { get; set; }
-        public list<KeyWord> keyWords { get; set; }
-        public list<Image>  images { get; set; }
-        public list<ArticleGroup> articleGroups { get; set; }
-        public list<ImageGroup> imageGroups { get; set; }
+        public List<Article> articles { get; set; }
+        public List<KeyWord> keyWords { get; set; }
+        public List<Image>  images { get; set; }
+        public List<ArticleGroup> articleGroups { get; set; }
+        public List<ImageGroup> imageGroups { get; set; }
 
 
     }

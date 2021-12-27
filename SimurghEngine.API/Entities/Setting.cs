@@ -1,8 +1,10 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace SimurghEngine.API.Entities.CMS
 {
     public class Setting
     {
-        [key]
+        [Key]
         public int settingId { get; set; }
         public string titleEn { get; set; }
         public string titleFa { get; set; }
