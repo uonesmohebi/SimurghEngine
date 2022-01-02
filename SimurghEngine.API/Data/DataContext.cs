@@ -15,9 +15,19 @@ namespace SimurghEngine.API.Data
         {
         }
 
+        #region Authentication Entities
         public virtual DbSet<AppUser> AppUsers { get; set; }
-        public virtual DbSet<Article> Articles { get; set; }
+        public virtual DbSet<RoleAccess> RoleAccesses { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
+        #endregion
 
+
+#region CMS Entities
+        public virtual DbSet<Article> Articles { get; set; }
+        public virtual DbSet<ArticleGroup> ArticleGroups { get; set; }
+        public virtual DbSet<Image> Images { get; set; }
+        public virtual DbSet<ImageGroup> ImageGroups { get; set; }
+#endregion
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // configures one-to-many relationship
