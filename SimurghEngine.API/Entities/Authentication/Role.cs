@@ -5,13 +5,13 @@ namespace SimurghEngine.API.Entities.CMS
     public class Role
     {
         [Key]
-        public int roleId { get; set; }
-        public string titleEn { get; set; }
-        public string? titleFa { get; set; }
-        public string? desc { get; set; }
+        public int RoleId { get; set; }
+        public string TitleEn { get; set; }
+        public string? TitleFa { get; set; }
+        public string? Desc { get; set; }
         
 
-
-        public virtual List<AppUser> appusers { get; set; }
+        public virtual List<RoleAccess> RoleAccesses { get; set; }
+        public virtual List<AppUser> AppUsers { get; set; }
     }
 }

@@ -1,22 +1,19 @@
 using System.ComponentModel.DataAnnotations;
+using SimurghEngine.API.Entities.Authentication;
 
 namespace SimurghEngine.API.Entities.CMS
 {
-    public class Image
+    public class Image: BaseUserData
     {
         [Key]
-        public int imageId { get; set; }
-        public string titleEn { get; set; }
-        public string? titleFa { get; set; }
-        public string? alternateText { get; set; }
-        public string? desc { get; set; }
-        public DateTime createDate { get; set; }
-        public DateTime? modifiedDate { get; set; }
-        public bool isDeleted { get; set; }
-        
-        
+        public int ImageId { get; set; }
+        public string TitleEn { get; set; }
+        public string? TitleFa { get; set; }
+        public string? AlternateText { get; set; }
+        public string? Desc { get; set; }
+        public bool IsDeleted { get; set; }
 
-        public virtual AppUser creatorUserId { get; set; }
-        public virtual AppUser? editorUserId { get; set; }
+
+        public virtual List<ImageGroup> ImageGroups { get; set; }
     }
 }

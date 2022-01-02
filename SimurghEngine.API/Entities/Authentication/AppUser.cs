@@ -5,30 +5,34 @@ namespace SimurghEngine.API.Entities.CMS
     public class AppUser
     {
         [Key]
-        public int appUserId { get; set; }
-        public string userName { get; set; }
-        public string? alias { get; set; }
-        public string password { get; set; }
-        public bool activeAccount { get; set; }
-        public string emailAccount { get; set; }
-        public string? emailActivation { get; set; }
-        public bool emailIsActive { get; set; }
-        public string? mobileNumber { get; set; }
-        public string? mobileActivation { get; set; }
-        public bool mobileIsActive { get; set; }
-        public DateTime createDate { get; set; }
-        public DateTime? lastLoginDate { get; set; }
-        public string? lastLoginIp { get; set; }
-        
-
-        public virtual Image appUserImage { get; set; }
-        public virtual Role role { get; set; }
-        public virtual List<Article> articles { get; set; }
-        public virtual List<KeyWord> keyWords { get; set; }
-        public virtual List<Image>  images { get; set; }
-        public virtual List<ArticleGroup> articleGroups { get; set; }
-        public virtual List<ImageGroup> imageGroups { get; set; }
+        public int AppUserId { get; set; }
+        public string UserName { get; set; }
+        public string? Alias { get; set; }
+        public bool AccountIsActive { get; set; }
+        public string EmailAccount { get; set; }
+        public string? EmailActivationCode { get; set; }
+        public bool EmailIsActive { get; set; }
+        public string? MobileNumber { get; set; }
+        public string? MobileActivationCode { get; set; }
+        public bool MobileIsActive { get; set; }
+        public DateTime CreateDate { get; set; }
+        public DateTime? LastLoginDate { get; set; }
+        public string? LastLoginIp { get; set; }
+        public byte[] PasswordHash { get; set; }
+        public byte[] PasswordSalt { get; set; }
+        public int AppUserImageId { get; set; }
 
 
+        public virtual List<Role> Roles { get; set; }
+        public virtual List<Article> ArticleCreators { get; set; }
+        public virtual List<Article> ArticleEditors { get; set; }
+        public virtual List<ArticleGroup> ArticleGroupCreators { get; set; }
+        public virtual List<ArticleGroup> ArticleGroupEditors { get; set; }
+        public virtual List<KeyWord> KeyWordCreators { get; set; }
+        public virtual List<KeyWord> KeyWordEditors { get; set; }
+        public virtual List<Image>  ImageCreators { get; set; }
+        public virtual List<Image>  ImageEditors { get; set; }
+        public virtual List<ImageGroup> ImageGroupCreators { get; set; }
+        public virtual List<ImageGroup> ImageGroupEditors { get; set; }
     }
 }

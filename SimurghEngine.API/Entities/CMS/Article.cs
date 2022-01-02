@@ -1,24 +1,19 @@
 using System.ComponentModel.DataAnnotations;
+using SimurghEngine.API.Entities.Authentication;
 
 namespace SimurghEngine.API.Entities.CMS
 {
-    public class Article
+    public class Article: BaseUserData
     {
         [Key]
-        public int articleId { get; set; }
-        public string titleEn { get; set; }
-        public string? titleFa { get; set; }
-        public string? content { get; set; }
-        public string? metaDesc { get; set; }    
-        public string? summary { get; set; }
-        public DateTime createDate { get; set; }
-        public DateTime? modifiedDate { get; set; }
-        public bool isDeleted { get; set; }
-
-
-
-        public virtual AppUser creatorUserId { get; set; }
-        public virtual AppUser? editorUserId { get; set; }
-
+        public int ArticleId { get; set; }
+        public string TitleEn { get; set; }
+        public string? TitleFa { get; set; }
+        public string? Content { get; set; }
+        public string? MetaDesc { get; set; }    
+        public string? Summary { get; set; }
+        public bool IsDeleted { get; set; }
+        public virtual List<KeyWord> KeyWords { get; set; }
+        public virtual List<ArticleGroup> ArticleGroups { get; set; }
     }
 }

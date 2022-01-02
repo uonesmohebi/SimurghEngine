@@ -10,5 +10,6 @@ namespace SimurghEngine.API.Entities.CMS
         public string? titleFa { get; set; }
         public string? desc { get; set; }
         
+        public virtual List<Role> Roles { get; set; }
     }
 }
