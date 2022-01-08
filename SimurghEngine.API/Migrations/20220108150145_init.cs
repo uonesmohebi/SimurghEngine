@@ -92,34 +92,29 @@ namespace SimurghEngine.API.Migrations
                     TitleEn = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TitleFa = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Desc = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatorUserId = table.Column<int>(type: "int", nullable: false),
-                    EditorUserId = table.Column<int>(type: "int", nullable: false)
+                    AppUserId = table.Column<int>(type: "int", nullable: true),
+                    AppUserId1 = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ArticleGroups", x => x.ArticleGroupId);
                     table.ForeignKey(
-                        name: "FK_ArticleGroups_AppUsers_CreatorUserId",
-                        column: x => x.CreatorUserId,
+                        name: "FK_ArticleGroups_AppUsers_AppUserId",
+                        column: x => x.AppUserId,
                         principalTable: "AppUsers",
-                        principalColumn: "AppUserId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "AppUserId");
                     table.ForeignKey(
-                        name: "FK_ArticleGroups_AppUsers_EditorUserId",
-                        column: x => x.EditorUserId,
+                        name: "FK_ArticleGroups_AppUsers_AppUserId1",
+                        column: x => x.AppUserId1,
                         principalTable: "AppUsers",
-                        principalColumn: "AppUserId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "AppUserId");
                 });
 
             migrationBuilder.CreateTable(
                 name: "Articles",
                 columns: table => new
                 {
-                    ArticleId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ArticleId = table.Column<int>(type: "int", nullable: false),
                     TitleEn = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TitleFa = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -128,23 +123,22 @@ namespace SimurghEngine.API.Migrations
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatorUserId = table.Column<int>(type: "int", nullable: false),
-                    EditorUserId = table.Column<int>(type: "int", nullable: true)
+                    CreatorUserAppUserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Articles", x => x.ArticleId);
                     table.ForeignKey(
-                        name: "FK_Articles_AppUsers_CreatorUserId",
-                        column: x => x.CreatorUserId,
+                        name: "FK_Articles_AppUsers_ArticleId",
+                        column: x => x.ArticleId,
+                        principalTable: "AppUsers",
+                        principalColumn: "AppUserId");
+                    table.ForeignKey(
+                        name: "FK_Articles_AppUsers_CreatorUserAppUserId",
+                        column: x => x.CreatorUserAppUserId,
                         principalTable: "AppUsers",
                         principalColumn: "AppUserId",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Articles_AppUsers_EditorUserId",
-                        column: x => x.EditorUserId,
-                        principalTable: "AppUsers",
-                        principalColumn: "AppUserId");
                 });
 
             migrationBuilder.CreateTable(
@@ -157,34 +151,29 @@ namespace SimurghEngine.API.Migrations
                     TitleEn = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TitleFa = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Desc = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatorUserId = table.Column<int>(type: "int", nullable: false),
-                    EditorUserId = table.Column<int>(type: "int", nullable: false)
+                    AppUserId = table.Column<int>(type: "int", nullable: true),
+                    AppUserId1 = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ImageGroups", x => x.ImageGroupId);
                     table.ForeignKey(
-                        name: "FK_ImageGroups_AppUsers_CreatorUserId",
-                        column: x => x.CreatorUserId,
+                        name: "FK_ImageGroups_AppUsers_AppUserId",
+                        column: x => x.AppUserId,
                         principalTable: "AppUsers",
-                        principalColumn: "AppUserId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "AppUserId");
                     table.ForeignKey(
-                        name: "FK_ImageGroups_AppUsers_EditorUserId",
-                        column: x => x.EditorUserId,
+                        name: "FK_ImageGroups_AppUsers_AppUserId1",
+                        column: x => x.AppUserId1,
                         principalTable: "AppUsers",
-                        principalColumn: "AppUserId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "AppUserId");
                 });
 
             migrationBuilder.CreateTable(
                 name: "Images",
                 columns: table => new
                 {
-                    ImageId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ImageId = table.Column<int>(type: "int", nullable: false),
                     TitleEn = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TitleFa = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AlternateText = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -192,24 +181,22 @@ namespace SimurghEngine.API.Migrations
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatorUserId = table.Column<int>(type: "int", nullable: false),
-                    EditorUserId = table.Column<int>(type: "int", nullable: false)
+                    CreatorUserAppUserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Images", x => x.ImageId);
                     table.ForeignKey(
-                        name: "FK_Images_AppUsers_CreatorUserId",
-                        column: x => x.CreatorUserId,
+                        name: "FK_Images_AppUsers_CreatorUserAppUserId",
+                        column: x => x.CreatorUserAppUserId,
                         principalTable: "AppUsers",
                         principalColumn: "AppUserId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Images_AppUsers_EditorUserId",
-                        column: x => x.EditorUserId,
+                        name: "FK_Images_AppUsers_ImageId",
+                        column: x => x.ImageId,
                         principalTable: "AppUsers",
-                        principalColumn: "AppUserId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "AppUserId");
                 });
 
             migrationBuilder.CreateTable(
@@ -222,26 +209,22 @@ namespace SimurghEngine.API.Migrations
                     TitleFa = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Desc = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatorUserId = table.Column<int>(type: "int", nullable: false),
-                    EditorUserId = table.Column<int>(type: "int", nullable: false)
+                    AppUserId = table.Column<int>(type: "int", nullable: true),
+                    AppUserId1 = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_KeyWords", x => x.KeyWordId);
                     table.ForeignKey(
-                        name: "FK_KeyWords_AppUsers_CreatorUserId",
-                        column: x => x.CreatorUserId,
+                        name: "FK_KeyWords_AppUsers_AppUserId",
+                        column: x => x.AppUserId,
                         principalTable: "AppUsers",
-                        principalColumn: "AppUserId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "AppUserId");
                     table.ForeignKey(
-                        name: "FK_KeyWords_AppUsers_EditorUserId",
-                        column: x => x.EditorUserId,
+                        name: "FK_KeyWords_AppUsers_AppUserId1",
+                        column: x => x.AppUserId1,
                         principalTable: "AppUsers",
-                        principalColumn: "AppUserId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "AppUserId");
                 });
 
             migrationBuilder.CreateTable(
@@ -375,14 +358,14 @@ namespace SimurghEngine.API.Migrations
                 column: "ArticlesArticleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ArticleGroups_CreatorUserId",
+                name: "IX_ArticleGroups_AppUserId",
                 table: "ArticleGroups",
-                column: "CreatorUserId");
+                column: "AppUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ArticleGroups_EditorUserId",
+                name: "IX_ArticleGroups_AppUserId1",
                 table: "ArticleGroups",
-                column: "EditorUserId");
+                column: "AppUserId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ArticleKeyWord_KeyWordsKeyWordId",
@@ -390,24 +373,19 @@ namespace SimurghEngine.API.Migrations
                 column: "KeyWordsKeyWordId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Articles_CreatorUserId",
+                name: "IX_Articles_CreatorUserAppUserId",
                 table: "Articles",
-                column: "CreatorUserId");
+                column: "CreatorUserAppUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Articles_EditorUserId",
-                table: "Articles",
-                column: "EditorUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ImageGroups_CreatorUserId",
+                name: "IX_ImageGroups_AppUserId",
                 table: "ImageGroups",
-                column: "CreatorUserId");
+                column: "AppUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ImageGroups_EditorUserId",
+                name: "IX_ImageGroups_AppUserId1",
                 table: "ImageGroups",
-                column: "EditorUserId");
+                column: "AppUserId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ImageImageGroup_ImagesImageId",
@@ -415,24 +393,19 @@ namespace SimurghEngine.API.Migrations
                 column: "ImagesImageId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Images_CreatorUserId",
+                name: "IX_Images_CreatorUserAppUserId",
                 table: "Images",
-                column: "CreatorUserId");
+                column: "CreatorUserAppUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Images_EditorUserId",
-                table: "Images",
-                column: "EditorUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_KeyWords_CreatorUserId",
+                name: "IX_KeyWords_AppUserId",
                 table: "KeyWords",
-                column: "CreatorUserId");
+                column: "AppUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_KeyWords_EditorUserId",
+                name: "IX_KeyWords_AppUserId1",
                 table: "KeyWords",
-                column: "EditorUserId");
+                column: "AppUserId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RoleRoleAccess_RolesRoleId",

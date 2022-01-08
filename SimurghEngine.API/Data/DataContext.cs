@@ -35,41 +35,41 @@ namespace SimurghEngine.API.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Article>(entity =>
-                entity
-                .HasOne<AppUser>(e => e.CreatorUser)
-                .WithMany(e => e.ArticleCreators)
-                .HasForeignKey(e => e.CreatorUserId)
-                .IsRequired(true)
-                );
+            entity
+            .HasOne(e => e.CreatorUser)
+            .WithMany(e => e.ArticleCreators)
+            .HasForeignKey(e => e.ArticleId)
+            .IsRequired(true)
+            );
 
             modelBuilder.Entity<Article>(entity =>
             entity
             .HasOne<AppUser>(e => e.EditorUser)
             .WithMany(e => e.ArticleEditors)
-            .HasForeignKey(e => e.EditorUserId)
+            .HasForeignKey(e => e.ArticleId)
             .IsRequired(false)
             );
 
-            modelBuilder.Entity<ArticleGroup>(entity =>
-            entity
-            .HasOne(e => e.CreatorUser)
-            .WithMany(e => e.ArticleGroupCreators)
-            .HasForeignKey(e => e.CreatorUserId)
-            .IsRequired(true)
-            );
+            // modelBuilder.Entity<ArticleGroup>(entity =>
+            // entity
+            // .HasOne(e => e.CreatorUser)
+            // .WithMany(e => e.ArticleGroupCreators)
+            // .HasForeignKey(e => e.ArticleGroupId)
+            // .IsRequired(true)
+            // );
 
-            modelBuilder.Entity<ArticleGroup>(entity =>
-            entity
-            .HasOne<AppUser>(e => e.EditorUser)
-            .WithMany(e => e.ArticleGroupEditors)
-            .HasForeignKey(e => e.EditorUserId)
-            .IsRequired(true));
+            // modelBuilder.Entity<ArticleGroup>(entity =>
+            // entity
+            // .HasOne<AppUser>(e => e.EditorUser)
+            // .WithMany(e => e.ArticleGroupEditors)
+            // .HasForeignKey(e => e.ArticleGroupId)
+            // .IsRequired(false));
 
             modelBuilder.Entity<Image>(entity =>
             entity
             .HasOne(e => e.CreatorUser)
             .WithMany(e => e.ImageCreators)
-            .HasForeignKey(e => e.CreatorUserId)
+            .HasForeignKey(e => e.ImageId)
             .IsRequired(true)
             );
 
@@ -77,38 +77,38 @@ namespace SimurghEngine.API.Data
             entity
             .HasOne<AppUser>(e => e.EditorUser)
             .WithMany(e => e.ImageEditors)
-            .HasForeignKey(e => e.EditorUserId)
-            .IsRequired(true));
+            .HasForeignKey(e => e.ImageId)
+            .IsRequired(false));
 
-            modelBuilder.Entity<ImageGroup>(entity =>
-            entity
-            .HasOne(e => e.CreatorUser)
-            .WithMany(e => e.ImageGroupCreators)
-            .HasForeignKey(e => e.CreatorUserId)
-            .IsRequired(true)
-            );
+            // modelBuilder.Entity<ImageGroup>(entity =>
+            // entity
+            // .HasOne(e => e.CreatorUser)
+            // .WithMany(e => e.ImageGroupCreators)
+            // .HasForeignKey(e => e.ImageGroupId)
+            // .IsRequired(true)
+            // );
 
-            modelBuilder.Entity<ImageGroup>(entity =>
-            entity
-            .HasOne<AppUser>(e => e.EditorUser)
-            .WithMany(e => e.ImageGroupEditors)
-            .HasForeignKey(e => e.EditorUserId)
-            .IsRequired(true));
+            // modelBuilder.Entity<ImageGroup>(entity =>
+            // entity
+            // .HasOne<AppUser>(e => e.EditorUser)
+            // .WithMany(e => e.ImageGroupEditors)
+            // .HasForeignKey(e => e.ImageGroupId)
+            // .IsRequired(false));
 
-            modelBuilder.Entity<KeyWord>(entity =>
-            entity
-            .HasOne(e => e.CreatorUser)
-            .WithMany(e => e.KeyWordCreators)
-            .HasForeignKey(e => e.CreatorUserId)
-            .IsRequired(true)
-            );
+            // modelBuilder.Entity<KeyWord>(entity =>
+            // entity
+            // .HasOne(e => e.CreatorUser)
+            // .WithMany(e => e.KeyWordCreators)
+            // .HasForeignKey(e => e.KeyWordId)
+            // .IsRequired(true)
+            // );
 
-            modelBuilder.Entity<KeyWord>(entity =>
-            entity
-            .HasOne<AppUser>(e => e.EditorUser)
-            .WithMany(e => e.KeyWordEditors)
-            .HasForeignKey(e => e.EditorUserId)
-            .IsRequired(true));
+            // modelBuilder.Entity<KeyWord>(entity =>
+            // entity
+            // .HasOne<AppUser>(e => e.EditorUser)
+            // .WithMany(e => e.KeyWordEditors)
+            // .HasForeignKey(e => e.KeyWordId)
+            // .IsRequired(false));
 
         }
     }

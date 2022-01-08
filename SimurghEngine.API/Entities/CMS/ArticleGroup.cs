@@ -3,7 +3,7 @@ using SimurghEngine.API.Entities.Authentication;
 
 namespace SimurghEngine.API.Entities.CMS
 {
-    public class ArticleGroup : BaseUserData
+    public class ArticleGroup
     {
         [Key]
         public int ArticleGroupId { get; set; }
