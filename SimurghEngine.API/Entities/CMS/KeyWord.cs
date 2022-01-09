@@ -3,7 +3,7 @@ using SimurghEngine.API.Entities.Authentication;
 
 namespace SimurghEngine.API.Entities.CMS
 {
-    public class KeyWord
+    public class KeyWord: BaseObjectData
     {
         [Key]
         public int KeyWordId { get; set; }

@@ -3,7 +3,7 @@ using SimurghEngine.API.Entities.Authentication;
 
 namespace SimurghEngine.API.Entities.CMS
 {
-    public class Article: BaseUserData
+    public class Article: BaseObjectData
     {
         [Key]
         public int ArticleId { get; set; }
@@ -13,7 +13,12 @@ namespace SimurghEngine.API.Entities.CMS
         public string? MetaDesc { get; set; }    
         public string? Summary { get; set; }
         public bool IsDeleted { get; set; }
+
+
         public virtual List<KeyWord> KeyWords { get; set; }
         public virtual List<ArticleGroup> ArticleGroups { get; set; }
+
+
+        public virtual AppUser AppUser { get; set; }
     }
 }

@@ -3,7 +3,7 @@ using SimurghEngine.API.Entities.Authentication;
 
 namespace SimurghEngine.API.Entities.CMS
 {
-    public class Image: BaseUserData
+    public class Image: BaseObjectData
     {
         [Key]
         public int ImageId { get; set; }
@@ -15,5 +15,8 @@ namespace SimurghEngine.API.Entities.CMS
 
 
         public virtual List<ImageGroup> ImageGroups { get; set; }
+
+
+        public virtual AppUser AppUser { get; set; }
     }
 }

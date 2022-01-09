@@ -24,15 +24,7 @@ namespace SimurghEngine.API.Entities.CMS
 
 
         public virtual List<Role> Roles { get; set; }
-        public virtual List<Article> ArticleCreators { get; set; }
-        public virtual List<Article> ArticleEditors { get; set; }
-        public virtual List<ArticleGroup> ArticleGroupCreators { get; set; }
-        public virtual List<ArticleGroup> ArticleGroupEditors { get; set; }
-        public virtual List<KeyWord> KeyWordCreators { get; set; }
-        public virtual List<KeyWord> KeyWordEditors { get; set; }
-        public virtual List<Image>  ImageCreators { get; set; }
-        public virtual List<Image>  ImageEditors { get; set; }
-        public virtual List<ImageGroup> ImageGroupCreators { get; set; }
-        public virtual List<ImageGroup> ImageGroupEditors { get; set; }
+        public virtual List<Article> Articles { get; set; }
+        public virtual List<Image>  Images { get; set; }
     }
 }

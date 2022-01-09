@@ -37,6 +37,63 @@ namespace SimurghEngine.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ArticleGroups",
+                columns: table => new
+                {
+                    ArticleGroupId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ParentGroupId = table.Column<int>(type: "int", nullable: false),
+                    TitleEn = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TitleFa = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Desc = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    EditorUserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ArticleGroups", x => x.ArticleGroupId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ImageGroups",
+                columns: table => new
+                {
+                    ImageGroupId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ParentGroupId = table.Column<int>(type: "int", nullable: true),
+                    TitleEn = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TitleFa = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Desc = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    EditorUserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ImageGroups", x => x.ImageGroupId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "KeyWords",
+                columns: table => new
+                {
+                    KeyWordId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TitleEn = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TitleFa = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Desc = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    EditorUserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_KeyWords", x => x.KeyWordId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "RoleAccesses",
                 columns: table => new
                 {
@@ -83,148 +140,58 @@ namespace SimurghEngine.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ArticleGroups",
-                columns: table => new
-                {
-                    ArticleGroupId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ParentGroupId = table.Column<int>(type: "int", nullable: false),
-                    TitleEn = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TitleFa = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Desc = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AppUserId = table.Column<int>(type: "int", nullable: true),
-                    AppUserId1 = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ArticleGroups", x => x.ArticleGroupId);
-                    table.ForeignKey(
-                        name: "FK_ArticleGroups_AppUsers_AppUserId",
-                        column: x => x.AppUserId,
-                        principalTable: "AppUsers",
-                        principalColumn: "AppUserId");
-                    table.ForeignKey(
-                        name: "FK_ArticleGroups_AppUsers_AppUserId1",
-                        column: x => x.AppUserId1,
-                        principalTable: "AppUsers",
-                        principalColumn: "AppUserId");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Articles",
                 columns: table => new
                 {
-                    ArticleId = table.Column<int>(type: "int", nullable: false),
+                    ArticleId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     TitleEn = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TitleFa = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MetaDesc = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Summary = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    AppUserId = table.Column<int>(type: "int", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatorUserAppUserId = table.Column<int>(type: "int", nullable: false)
+                    EditorUserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Articles", x => x.ArticleId);
                     table.ForeignKey(
-                        name: "FK_Articles_AppUsers_ArticleId",
-                        column: x => x.ArticleId,
-                        principalTable: "AppUsers",
-                        principalColumn: "AppUserId");
-                    table.ForeignKey(
-                        name: "FK_Articles_AppUsers_CreatorUserAppUserId",
-                        column: x => x.CreatorUserAppUserId,
-                        principalTable: "AppUsers",
-                        principalColumn: "AppUserId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ImageGroups",
-                columns: table => new
-                {
-                    ImageGroupId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ParentGroupId = table.Column<int>(type: "int", nullable: true),
-                    TitleEn = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TitleFa = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Desc = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AppUserId = table.Column<int>(type: "int", nullable: true),
-                    AppUserId1 = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ImageGroups", x => x.ImageGroupId);
-                    table.ForeignKey(
-                        name: "FK_ImageGroups_AppUsers_AppUserId",
+                        name: "FK_Articles_AppUsers_AppUserId",
                         column: x => x.AppUserId,
                         principalTable: "AppUsers",
-                        principalColumn: "AppUserId");
-                    table.ForeignKey(
-                        name: "FK_ImageGroups_AppUsers_AppUserId1",
-                        column: x => x.AppUserId1,
-                        principalTable: "AppUsers",
-                        principalColumn: "AppUserId");
+                        principalColumn: "AppUserId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Images",
                 columns: table => new
                 {
-                    ImageId = table.Column<int>(type: "int", nullable: false),
+                    ImageId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     TitleEn = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TitleFa = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AlternateText = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Desc = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    AppUserId = table.Column<int>(type: "int", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatorUserAppUserId = table.Column<int>(type: "int", nullable: false)
+                    EditorUserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Images", x => x.ImageId);
                     table.ForeignKey(
-                        name: "FK_Images_AppUsers_CreatorUserAppUserId",
-                        column: x => x.CreatorUserAppUserId,
-                        principalTable: "AppUsers",
-                        principalColumn: "AppUserId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Images_AppUsers_ImageId",
-                        column: x => x.ImageId,
-                        principalTable: "AppUsers",
-                        principalColumn: "AppUserId");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "KeyWords",
-                columns: table => new
-                {
-                    KeyWordId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TitleEn = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TitleFa = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Desc = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    AppUserId = table.Column<int>(type: "int", nullable: true),
-                    AppUserId1 = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_KeyWords", x => x.KeyWordId);
-                    table.ForeignKey(
-                        name: "FK_KeyWords_AppUsers_AppUserId",
+                        name: "FK_Images_AppUsers_AppUserId",
                         column: x => x.AppUserId,
                         principalTable: "AppUsers",
-                        principalColumn: "AppUserId");
-                    table.ForeignKey(
-                        name: "FK_KeyWords_AppUsers_AppUserId1",
-                        column: x => x.AppUserId1,
-                        principalTable: "AppUsers",
-                        principalColumn: "AppUserId");
+                        principalColumn: "AppUserId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -242,13 +209,13 @@ namespace SimurghEngine.API.Migrations
                         column: x => x.AppUsersAppUserId,
                         principalTable: "AppUsers",
                         principalColumn: "AppUserId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_AppUserRole_Roles_RolesRoleId",
                         column: x => x.RolesRoleId,
                         principalTable: "Roles",
                         principalColumn: "RoleId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -266,13 +233,13 @@ namespace SimurghEngine.API.Migrations
                         column: x => x.RoleAccessesroleAccessId,
                         principalTable: "RoleAccesses",
                         principalColumn: "roleAccessId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_RoleRoleAccess_Roles_RolesRoleId",
                         column: x => x.RolesRoleId,
                         principalTable: "Roles",
                         principalColumn: "RoleId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -290,37 +257,13 @@ namespace SimurghEngine.API.Migrations
                         column: x => x.ArticleGroupsArticleGroupId,
                         principalTable: "ArticleGroups",
                         principalColumn: "ArticleGroupId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_ArticleArticleGroup_Articles_ArticlesArticleId",
                         column: x => x.ArticlesArticleId,
                         principalTable: "Articles",
                         principalColumn: "ArticleId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ImageImageGroup",
-                columns: table => new
-                {
-                    ImageGroupsImageGroupId = table.Column<int>(type: "int", nullable: false),
-                    ImagesImageId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ImageImageGroup", x => new { x.ImageGroupsImageGroupId, x.ImagesImageId });
-                    table.ForeignKey(
-                        name: "FK_ImageImageGroup_ImageGroups_ImageGroupsImageGroupId",
-                        column: x => x.ImageGroupsImageGroupId,
-                        principalTable: "ImageGroups",
-                        principalColumn: "ImageGroupId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ImageImageGroup_Images_ImagesImageId",
-                        column: x => x.ImagesImageId,
-                        principalTable: "Images",
-                        principalColumn: "ImageId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -338,13 +281,37 @@ namespace SimurghEngine.API.Migrations
                         column: x => x.ArticlesArticleId,
                         principalTable: "Articles",
                         principalColumn: "ArticleId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_ArticleKeyWord_KeyWords_KeyWordsKeyWordId",
                         column: x => x.KeyWordsKeyWordId,
                         principalTable: "KeyWords",
                         principalColumn: "KeyWordId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ImageImageGroup",
+                columns: table => new
+                {
+                    ImageGroupsImageGroupId = table.Column<int>(type: "int", nullable: false),
+                    ImagesImageId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ImageImageGroup", x => new { x.ImageGroupsImageGroupId, x.ImagesImageId });
+                    table.ForeignKey(
+                        name: "FK_ImageImageGroup_ImageGroups_ImageGroupsImageGroupId",
+                        column: x => x.ImageGroupsImageGroupId,
+                        principalTable: "ImageGroups",
+                        principalColumn: "ImageGroupId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ImageImageGroup_Images_ImagesImageId",
+                        column: x => x.ImagesImageId,
+                        principalTable: "Images",
+                        principalColumn: "ImageId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -358,34 +325,14 @@ namespace SimurghEngine.API.Migrations
                 column: "ArticlesArticleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ArticleGroups_AppUserId",
-                table: "ArticleGroups",
-                column: "AppUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ArticleGroups_AppUserId1",
-                table: "ArticleGroups",
-                column: "AppUserId1");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ArticleKeyWord_KeyWordsKeyWordId",
                 table: "ArticleKeyWord",
                 column: "KeyWordsKeyWordId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Articles_CreatorUserAppUserId",
+                name: "IX_Articles_AppUserId",
                 table: "Articles",
-                column: "CreatorUserAppUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ImageGroups_AppUserId",
-                table: "ImageGroups",
                 column: "AppUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ImageGroups_AppUserId1",
-                table: "ImageGroups",
-                column: "AppUserId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ImageImageGroup_ImagesImageId",
@@ -393,19 +340,9 @@ namespace SimurghEngine.API.Migrations
                 column: "ImagesImageId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Images_CreatorUserAppUserId",
+                name: "IX_Images_AppUserId",
                 table: "Images",
-                column: "CreatorUserAppUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_KeyWords_AppUserId",
-                table: "KeyWords",
                 column: "AppUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_KeyWords_AppUserId1",
-                table: "KeyWords",
-                column: "AppUserId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RoleRoleAccess_RolesRoleId",

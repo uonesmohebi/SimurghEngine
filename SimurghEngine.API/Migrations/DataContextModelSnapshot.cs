@@ -162,6 +162,12 @@ namespace SimurghEngine.API.Migrations
             modelBuilder.Entity("SimurghEngine.API.Entities.CMS.Article", b =>
                 {
                     b.Property<int>("ArticleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ArticleId"), 1L, 1);
+
+                    b.Property<int>("AppUserId")
                         .HasColumnType("int");
 
                     b.Property<string>("Content")
@@ -170,7 +176,7 @@ namespace SimurghEngine.API.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatorUserAppUserId")
+                    b.Property<int>("EditorUserId")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsDeleted")
@@ -194,7 +200,7 @@ namespace SimurghEngine.API.Migrations
 
                     b.HasKey("ArticleId");
 
-                    b.HasIndex("CreatorUserAppUserId");
+                    b.HasIndex("AppUserId");
 
                     b.ToTable("Articles");
                 });
@@ -207,14 +213,17 @@ namespace SimurghEngine.API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ArticleGroupId"), 1L, 1);
 
-                    b.Property<int?>("AppUserId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("AppUserId1")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Desc")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EditorUserId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("ParentGroupId")
                         .HasColumnType("int");
@@ -228,29 +237,31 @@ namespace SimurghEngine.API.Migrations
 
                     b.HasKey("ArticleGroupId");
 
-                    b.HasIndex("AppUserId");
-
-                    b.HasIndex("AppUserId1");
-
                     b.ToTable("ArticleGroups");
                 });
 
             modelBuilder.Entity("SimurghEngine.API.Entities.CMS.Image", b =>
                 {
                     b.Property<int>("ImageId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ImageId"), 1L, 1);
 
                     b.Property<string>("AlternateText")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("AppUserId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatorUserAppUserId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Desc")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EditorUserId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -267,7 +278,7 @@ namespace SimurghEngine.API.Migrations
 
                     b.HasKey("ImageId");
 
-                    b.HasIndex("CreatorUserAppUserId");
+                    b.HasIndex("AppUserId");
 
                     b.ToTable("Images");
                 });
@@ -280,14 +291,17 @@ namespace SimurghEngine.API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ImageGroupId"), 1L, 1);
 
-                    b.Property<int?>("AppUserId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("AppUserId1")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Desc")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EditorUserId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int?>("ParentGroupId")
                         .HasColumnType("int");
@@ -301,10 +315,6 @@ namespace SimurghEngine.API.Migrations
 
                     b.HasKey("ImageGroupId");
 
-                    b.HasIndex("AppUserId");
-
-                    b.HasIndex("AppUserId1");
-
                     b.ToTable("ImageGroups");
                 });
 
@@ -316,17 +326,20 @@ namespace SimurghEngine.API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("KeyWordId"), 1L, 1);
 
-                    b.Property<int?>("AppUserId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("AppUserId1")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Desc")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("EditorUserId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("TitleEn")
                         .IsRequired()
@@ -336,10 +349,6 @@ namespace SimurghEngine.API.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("KeyWordId");
-
-                    b.HasIndex("AppUserId");
-
-                    b.HasIndex("AppUserId1");
 
                     b.ToTable("KeyWords");
                 });
@@ -422,13 +431,13 @@ namespace SimurghEngine.API.Migrations
                     b.HasOne("SimurghEngine.API.Entities.CMS.AppUser", null)
                         .WithMany()
                         .HasForeignKey("AppUsersAppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("SimurghEngine.API.Entities.CMS.Role", null)
                         .WithMany()
                         .HasForeignKey("RolesRoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -437,13 +446,13 @@ namespace SimurghEngine.API.Migrations
                     b.HasOne("SimurghEngine.API.Entities.CMS.ArticleGroup", null)
                         .WithMany()
                         .HasForeignKey("ArticleGroupsArticleGroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("SimurghEngine.API.Entities.CMS.Article", null)
                         .WithMany()
                         .HasForeignKey("ArticlesArticleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -452,13 +461,13 @@ namespace SimurghEngine.API.Migrations
                     b.HasOne("SimurghEngine.API.Entities.CMS.Article", null)
                         .WithMany()
                         .HasForeignKey("ArticlesArticleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("SimurghEngine.API.Entities.CMS.KeyWord", null)
                         .WithMany()
                         .HasForeignKey("KeyWordsKeyWordId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -467,13 +476,13 @@ namespace SimurghEngine.API.Migrations
                     b.HasOne("SimurghEngine.API.Entities.CMS.ImageGroup", null)
                         .WithMany()
                         .HasForeignKey("ImageGroupsImageGroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("SimurghEngine.API.Entities.CMS.Image", null)
                         .WithMany()
                         .HasForeignKey("ImagesImageId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -482,104 +491,43 @@ namespace SimurghEngine.API.Migrations
                     b.HasOne("SimurghEngine.API.Entities.CMS.RoleAccess", null)
                         .WithMany()
                         .HasForeignKey("RoleAccessesroleAccessId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("SimurghEngine.API.Entities.CMS.Role", null)
                         .WithMany()
                         .HasForeignKey("RolesRoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("SimurghEngine.API.Entities.CMS.Article", b =>
                 {
-                    b.HasOne("SimurghEngine.API.Entities.CMS.AppUser", "EditorUser")
-                        .WithMany("ArticleEditors")
-                        .HasForeignKey("ArticleId");
-
-                    b.HasOne("SimurghEngine.API.Entities.CMS.AppUser", "CreatorUser")
-                        .WithMany("ArticleCreators")
-                        .HasForeignKey("CreatorUserAppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                    b.HasOne("SimurghEngine.API.Entities.CMS.AppUser", "AppUser")
+                        .WithMany("Articles")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("CreatorUser");
-
-                    b.Navigation("EditorUser");
-                });
-
-            modelBuilder.Entity("SimurghEngine.API.Entities.CMS.ArticleGroup", b =>
-                {
-                    b.HasOne("SimurghEngine.API.Entities.CMS.AppUser", null)
-                        .WithMany("ArticleGroupCreators")
-                        .HasForeignKey("AppUserId");
-
-                    b.HasOne("SimurghEngine.API.Entities.CMS.AppUser", null)
-                        .WithMany("ArticleGroupEditors")
-                        .HasForeignKey("AppUserId1");
+                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("SimurghEngine.API.Entities.CMS.Image", b =>
                 {
-                    b.HasOne("SimurghEngine.API.Entities.CMS.AppUser", "CreatorUser")
-                        .WithMany("ImageCreators")
-                        .HasForeignKey("CreatorUserAppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                    b.HasOne("SimurghEngine.API.Entities.CMS.AppUser", "AppUser")
+                        .WithMany("Images")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("SimurghEngine.API.Entities.CMS.AppUser", "EditorUser")
-                        .WithMany("ImageEditors")
-                        .HasForeignKey("ImageId");
-
-                    b.Navigation("CreatorUser");
-
-                    b.Navigation("EditorUser");
-                });
-
-            modelBuilder.Entity("SimurghEngine.API.Entities.CMS.ImageGroup", b =>
-                {
-                    b.HasOne("SimurghEngine.API.Entities.CMS.AppUser", null)
-                        .WithMany("ImageGroupCreators")
-                        .HasForeignKey("AppUserId");
-
-                    b.HasOne("SimurghEngine.API.Entities.CMS.AppUser", null)
-                        .WithMany("ImageGroupEditors")
-                        .HasForeignKey("AppUserId1");
-                });
-
-            modelBuilder.Entity("SimurghEngine.API.Entities.CMS.KeyWord", b =>
-                {
-                    b.HasOne("SimurghEngine.API.Entities.CMS.AppUser", null)
-                        .WithMany("KeyWordCreators")
-                        .HasForeignKey("AppUserId");
-
-                    b.HasOne("SimurghEngine.API.Entities.CMS.AppUser", null)
-                        .WithMany("KeyWordEditors")
-                        .HasForeignKey("AppUserId1");
+                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("SimurghEngine.API.Entities.CMS.AppUser", b =>
                 {
-                    b.Navigation("ArticleCreators");
+                    b.Navigation("Articles");
 
-                    b.Navigation("ArticleEditors");
-
-                    b.Navigation("ArticleGroupCreators");
-
-                    b.Navigation("ArticleGroupEditors");
-
-                    b.Navigation("ImageCreators");
-
-                    b.Navigation("ImageEditors");
-
-                    b.Navigation("ImageGroupCreators");
-
-                    b.Navigation("ImageGroupEditors");
-
-                    b.Navigation("KeyWordCreators");
-
-                    b.Navigation("KeyWordEditors");
+                    b.Navigation("Images");
                 });
 #pragma warning restore 612, 618
         }
