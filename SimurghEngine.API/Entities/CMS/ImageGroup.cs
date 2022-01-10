@@ -1,3 +1,10 @@
+/**
+ * @author [U.Mohebi]
+ * @email [uones.mohebi@gmail.com]
+ * @create date 2022-01-10 14:18:47
+ * @modify date 2022-01-10 14:18:47
+ * @desc [آبجکت دسته های تصاویر موجود در سیستم]
+ */
 using System.ComponentModel.DataAnnotations;
 using SimurghEngine.API.Entities.Authentication;
 

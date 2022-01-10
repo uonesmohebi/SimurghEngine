@@ -1,4 +1,10 @@
-using SimurghEngine.API.Entities.CMS;
+/**
+ * @author [U.Mohebi]
+ * @email [uones.mohebi@gmail.com]
+ * @create date 2022-01-10 14:15:13
+ * @modify date 2022-01-10 14:15:13
+ * @desc [کلاس مشخصات پایه آبجکت های کاربر]
+ */
 
 namespace SimurghEngine.API.Entities.Authentication
 {

@@ -1,9 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+/**
+ * @author [U.Mohebi]
+ * @email [uones.mohebi@gmail.com]
+ * @create date 2022-01-10 14:14:34
+ * @modify date 2022-01-10 14:14:34
+ * @desc [کانتکست اصلی دیتابیس هسته]
+ */
 using Microsoft.EntityFrameworkCore;
-using SimurghEngine.API.Entities;
 using SimurghEngine.API.Entities.CMS;
 
 

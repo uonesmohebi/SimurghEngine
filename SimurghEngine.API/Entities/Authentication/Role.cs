@@ -1,3 +1,10 @@
+/**
+ * @author [U.Mohebi]
+ * @email [uones.mohebi@gmail.com]
+ * @create date 2022-01-10 14:16:08
+ * @modify date 2022-01-10 14:16:08
+ * @desc [آبجکت رول های موجود در سیستم]
+ */
 using System.ComponentModel.DataAnnotations;
 
 namespace SimurghEngine.API.Entities.CMS
