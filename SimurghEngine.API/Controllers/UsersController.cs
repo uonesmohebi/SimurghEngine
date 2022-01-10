@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using SimurghEngine.API.Entities;
 using Microsoft.AspNetCore.Mvc;
 using SimurghEngine.API.Data;
 using Microsoft.EntityFrameworkCore;
@@ -9,9 +5,7 @@ using SimurghEngine.API.Entities.CMS;
 
 namespace SimurghEngine.API.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class UsersController : ControllerBase
+    public class UsersController : BaseApiController
     {
         private readonly DataContext _context;
         public UsersController(DataContext context)

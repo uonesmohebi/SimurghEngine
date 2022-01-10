@@ -9,7 +9,7 @@ namespace SimurghEngine.API.Entities.CMS
         public string UserName { get; set; }
         public string? Alias { get; set; }
         public bool AccountIsActive { get; set; }
-        public string EmailAccount { get; set; }
+        public string? EmailAccount { get; set; }
         public string? EmailActivationCode { get; set; }
         public bool EmailIsActive { get; set; }
         public string? MobileNumber { get; set; }
@@ -20,7 +20,7 @@ namespace SimurghEngine.API.Entities.CMS
         public string? LastLoginIp { get; set; }
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
-        public int AppUserImageId { get; set; }
+        public int? AppUserImageId { get; set; }
 
 
         public virtual List<Role> Roles { get; set; }

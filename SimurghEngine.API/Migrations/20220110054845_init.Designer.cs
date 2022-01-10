@@ -12,7 +12,7 @@ using SimurghEngine.API.Data;
 namespace SimurghEngine.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220109150441_init")]
+    [Migration("20220110054845_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
