@@ -23,7 +23,7 @@ namespace SimurghEngine.API.Entities.CMS
         public int? AppUserImageId { get; set; }
 
 
-        public virtual List<Role> Roles { get; set; }
+        public virtual List<Role> Roles { get; set; } 
         public virtual List<Article> Articles { get; set; }
         public virtual List<Image>  Images { get; set; }
     }
