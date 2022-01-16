@@ -1,5 +1,11 @@
 {
     "cSpell.words": [
-        "Simurgh"
-    ]
+        "hmac",
+        "HMACSHA",
+        "Simurgh",
+        "کاربری"
+    ],
+    "author-generator.author": "[U.Mohebi]",
+    "author-generator.email": "[uones.mohebi@gmail.com]",
+    "author-generator.updateOnSave": true
 }

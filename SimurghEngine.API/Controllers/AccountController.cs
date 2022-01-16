@@ -6,7 +6,9 @@
  * @desc [کنترلر فعالیت های مربوط به کاربران سیستم]
  */
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SimurghEngine.API.Data;
+using SimurghEngine.API.DTOs;
 using SimurghEngine.API.Entities.CMS;
 using System.Security.Cryptography;
 using System.Text;
@@ -22,21 +24,29 @@ namespace SimurghEngine.API.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<AppUser>> Register(string username, string password){
+        public async Task<ActionResult<AppUser>> Register(RegisterDto registerDto){
+
+            if (await UserExists(registerDto.Username)) return BadRequest("نام کاربری تکراری است");
+
             using var hmac = new HMACSHA512();
             var user= new AppUser{
-                UserName=username,
+                UserName=registerDto.Username.ToLower(),
                 AccountIsActive=true,
                 EmailIsActive=false,
                 MobileIsActive=false,
                 CreateDate=DateTime.Now,
-                PasswordHash= hmac.ComputeHash(Encoding.UTF8.GetBytes(password)),
+                PasswordHash= hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
                 PasswordSalt= hmac.Key
             };
 
             _context.AppUsers.Add(user);
             await _context.SaveChangesAsync();
             return user;
+        }
+
+        private async Task<bool> UserExists(string username)
+        {
+            return await _context.AppUsers.AnyAsync(x => x.UserName==username.ToLower());
         }
     }
 }
