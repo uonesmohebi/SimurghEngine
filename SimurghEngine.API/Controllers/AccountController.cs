@@ -45,8 +45,21 @@ namespace SimurghEngine.API.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<AppUser>> Login(string Username, string Password){
-            
+        public async Task<ActionResult<AppUser>> Login(LoginDto loginDto){
+            var existUser = await _context.AppUsers.SingleOrDefaultAsync(u => u.UserName==loginDto.Username);
+
+            if (existUser==null) return Unauthorized("Incorrect username or password!");
+
+            using var hmac= new HMACSHA512(existUser.PasswordSalt);
+
+            var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDto.Password));
+
+            for (int i = 0; i < computedHash.Length; i++)
+            {
+                if (computedHash[i]!=existUser.PasswordHash[i]) return Unauthorized("Incorrect username or password!");
+            }
+
+            return existUser;
         }
 
 

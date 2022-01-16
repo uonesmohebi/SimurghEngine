@@ -1,9 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using SimurghEngine.API.Data;
+using SimurghEngine.API.Interfaces;
+using SimurghEngine.API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddDbContext<DataContext>(options => {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
