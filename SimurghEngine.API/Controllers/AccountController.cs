@@ -26,7 +26,7 @@ namespace SimurghEngine.API.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<AppUser>> Register(RegisterDto registerDto){
 
-            if (await UserExists(registerDto.Username)) return BadRequest("نام کاربری تکراری است");
+            if (await UserExists(registerDto.Username)) return BadRequest("This username already exist, please try with another.");
 
             using var hmac = new HMACSHA512();
             var user= new AppUser{
@@ -43,6 +43,15 @@ namespace SimurghEngine.API.Controllers
             await _context.SaveChangesAsync();
             return user;
         }
+
+        [HttpPost("login")]
+        public async Task<ActionResult<AppUser>> Login(string Username, string Password){
+            
+        }
+
+
+
+
 
         private async Task<bool> UserExists(string username)
         {
