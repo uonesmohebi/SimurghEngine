@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using SimurghEngine.API.Data;
 using SimurghEngine.API.DTOs;
 using SimurghEngine.API.Entities.CMS;
+using SimurghEngine.API.Interfaces;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -18,13 +19,16 @@ namespace SimurghEngine.API.Controllers
     public class AccountController : BaseApiController
     {
         private readonly DataContext _context;
-        public AccountController(DataContext context)
+        private readonly ITokenService _tokenService;
+
+        public AccountController(DataContext context, ITokenService tokenService)
         {
             _context = context;
+            _tokenService = tokenService;
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<AppUser>> Register(RegisterDto registerDto){
+        public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto){
 
             if (await UserExists(registerDto.Username)) return BadRequest("This username already exist, please try with another.");
 
@@ -41,11 +45,14 @@ namespace SimurghEngine.API.Controllers
 
             _context.AppUsers.Add(user);
             await _context.SaveChangesAsync();
-            return user;
+            return new UserDto{
+                username= user.UserName,
+                token= _tokenService.CreateToken(user)
+            };
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<AppUser>> Login(LoginDto loginDto){
+        public async Task<ActionResult<UserDto>> Login(LoginDto loginDto){
             var existUser = await _context.AppUsers.SingleOrDefaultAsync(u => u.UserName==loginDto.Username);
 
             if (existUser==null) return Unauthorized("Incorrect username or password!");
@@ -59,7 +66,10 @@ namespace SimurghEngine.API.Controllers
                 if (computedHash[i]!=existUser.PasswordHash[i]) return Unauthorized("Incorrect username or password!");
             }
 
-            return existUser;
+            return new UserDto{
+                username= existUser.UserName,
+                token= _tokenService.CreateToken(existUser)
+            };
         }
 
 
