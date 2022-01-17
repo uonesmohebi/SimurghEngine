@@ -6,6 +6,7 @@
  * @desc [آبجکت مشخصات کاربران سیستم]
  */
 using System.ComponentModel.DataAnnotations;
+using SimurghEngine.API.Entities.CMS.PageBuilder;
 
 namespace SimurghEngine.API.Entities.CMS
 {
@@ -33,5 +34,6 @@ namespace SimurghEngine.API.Entities.CMS
         public virtual List<Role> Roles { get; set; } 
         public virtual List<Article> Articles { get; set; }
         public virtual List<Image>  Images { get; set; }
+        public virtual List<PageFrame> PageFrames { get; set; }
     }
 }

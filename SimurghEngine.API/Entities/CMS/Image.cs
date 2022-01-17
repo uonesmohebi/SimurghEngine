@@ -7,6 +7,7 @@
  */
 using System.ComponentModel.DataAnnotations;
 using SimurghEngine.API.Entities.Authentication;
+using SimurghEngine.API.Entities.CMS.PageBuilder;
 
 namespace SimurghEngine.API.Entities.CMS
 {
@@ -25,5 +26,6 @@ namespace SimurghEngine.API.Entities.CMS
 
 
         public virtual AppUser AppUser { get; set; }
+        public virtual RowBox RowBox { get; set; }
     }
 }
