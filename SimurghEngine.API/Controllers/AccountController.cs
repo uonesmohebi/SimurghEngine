@@ -5,6 +5,7 @@
  * @modify date 2022-01-10 14:12:29
  * @desc [کنترلر فعالیت های مربوط به کاربران سیستم]
  */
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SimurghEngine.API.Data;
@@ -27,6 +28,7 @@ namespace SimurghEngine.API.Controllers
             _tokenService = tokenService;
         }
 
+        [AllowAnonymous]
         [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto){
 
@@ -51,6 +53,7 @@ namespace SimurghEngine.API.Controllers
             };
         }
 
+        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto){
             var existUser = await _context.AppUsers.SingleOrDefaultAsync(u => u.UserName==loginDto.Username);

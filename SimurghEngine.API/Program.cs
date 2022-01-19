@@ -1,20 +1,31 @@
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using SimurghEngine.API.Data;
 using SimurghEngine.API.Interfaces;
 using SimurghEngine.API.Services;
+using SimurghEngine.API.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddScoped<ITokenService, TokenService>();
-builder.Services.AddDbContext<DataContext>(options => {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
+var provider= builder.Services.BuildServiceProvider();
+var _config= provider.GetRequiredService<IConfiguration>();
+
+
+builder.Services.AddApplicationServices(_config);
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
+builder.Services.AddIdentityServices(_config);
+
+
+
+
+
 
 var app = builder.Build();
 
@@ -30,6 +41,8 @@ if (app.Environment.IsDevelopment())
 app.UseRouting();
 
 app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200"));
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

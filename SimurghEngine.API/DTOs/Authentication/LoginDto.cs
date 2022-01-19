@@ -1,7 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+/**
+ * @author [U.Mohebi]
+ * @email [uones.mohebi@gmail.com]
+ * @create date 2022-01-19 16:45:27
+ * @modify date 2022-01-19 16:45:27
+ * @desc [Login DTO for get/send login data from/to UI]
+ */
 
 namespace SimurghEngine.API.DTOs
 {
