@@ -9,8 +9,8 @@ namespace SimurghEngine.API.Entities.CMS.PageBuilder
     {
         public string TitleEn { get; set; }
         public string? TitleFa { get; set; }
-        public int? Width { get; set; }
-        public int? Height { get; set; }
+        public string? Width { get; set; }
+        public string? Height { get; set; }
         public string? VerticalAlign { get; set; }
         public string? HorizontalAlign { get; set; }
         public string? BackgroundColor { get; set; }
