@@ -7,6 +7,8 @@ namespace SimurghEngine.API.Entities.CMS.PageBuilder
 {
     public class BaseHtmlObject
     {
+        public int? colParentId { get; set; }
+        public int? rowParentId { get; set; }
         public string TitleEn { get; set; }
         public string? TitleFa { get; set; }
         public string? Width { get; set; }
