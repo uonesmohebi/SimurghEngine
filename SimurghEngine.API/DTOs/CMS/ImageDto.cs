@@ -13,7 +13,6 @@ namespace SimurghEngine.API.Entities.CMS
 {
     public class ImageDto: BaseHtmlObjectDto
     {
-        [Key]
         public int ImageId { get; set; }
         public string TitleEn { get; set; }
         public string? TitleFa { get; set; }
@@ -22,6 +21,5 @@ namespace SimurghEngine.API.Entities.CMS
         public bool IsDeleted { get; set; }
 
 
-        public virtual List<ImageGroupDto> ImageGroups { get; set; }
     }
 }

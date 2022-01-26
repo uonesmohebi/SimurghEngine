@@ -12,7 +12,6 @@ namespace SimurghEngine.API.Entities.CMS
 {
     public class ImageGroupDto
     {
-        [Key]
         public int ImageGroupId { get; set; }
         public int? ParentGroupId { get; set; }
         public string TitleEn { get; set; }
@@ -20,6 +19,6 @@ namespace SimurghEngine.API.Entities.CMS
         public string? Desc { get; set; }
 
 
-        public virtual List<ImageDto> Images { get; set; }
+        public List<ImageDto> Images { get; set; }
     }
 }

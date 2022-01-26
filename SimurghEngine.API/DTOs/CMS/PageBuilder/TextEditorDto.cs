@@ -10,7 +10,5 @@ namespace SimurghEngine.API.Entities.CMS.PageBuilder
         public int TextEditorId { get; set; }
         public string? Content { get; set; }
 
-
-        public virtual List<ColBoxDto> ColBoxes { get; set; }
     }
 }

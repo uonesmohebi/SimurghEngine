@@ -8,14 +8,13 @@ namespace SimurghEngine.API.Entities.CMS.PageBuilder
 {
     public class ColBoxDto: BaseHtmlObjectDto
     {
-        [Key]
         public int ColBoxId { get; set; }
 
 
-        public virtual Image Image { get; set; }
-        public virtual RowBox RowBox { get; set; }
+        public Image Image { get; set; }  //Background image
+        public RowBox RowBox { get; set; } //Father rowBox
         
 
-        public virtual List<TextEditor> TextEditors { get; set; }
+        public List<TextEditor> TextEditors { get; set; }
     }
 }
