@@ -6,9 +6,9 @@
  * @desc [User DTO for get/send authorize data from/to UI]
  */
 
-namespace SimurghEngine.API.DTOs
+namespace SimurghEngine.API.Vms
 {
-    public class UserDto
+    public class UserVm
     {
         public string username { get; set; }
         public string token { get; set; }

@@ -30,7 +30,7 @@ namespace SimurghEngine.API.Controllers
 
         [AllowAnonymous]
         [HttpPost("register")]
-        public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto){
+        public async Task<ActionResult<UserVm>> Register(RegisterDto registerDto){
 
             if (await UserExists(registerDto.Username)) return BadRequest("This username already exist, please try with another.");
 
@@ -47,7 +47,7 @@ namespace SimurghEngine.API.Controllers
 
             _context.AppUsers.Add(user);
             await _context.SaveChangesAsync();
-            return new UserDto{
+            return new UserVm{
                 username= user.UserName,
                 token= _tokenService.CreateToken(user)
             };
