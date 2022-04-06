@@ -12,6 +12,7 @@ using SimurghEngine.API.Data;
 using SimurghEngine.API.DTOs;
 using SimurghEngine.API.Entities.CMS;
 using SimurghEngine.API.Interfaces;
+using SimurghEngine.API.Vms;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -55,7 +56,7 @@ namespace SimurghEngine.API.Controllers
 
         [AllowAnonymous]
         [HttpPost("login")]
-        public async Task<ActionResult<UserDto>> Login(LoginDto loginDto){
+        public async Task<ActionResult<UserVm>> Login(LoginDto loginDto){
             var existUser = await _context.AppUsers.SingleOrDefaultAsync(u => u.UserName==loginDto.Username);
 
             if (existUser==null) return Unauthorized("Incorrect username or password!");
@@ -69,7 +70,7 @@ namespace SimurghEngine.API.Controllers
                 if (computedHash[i]!=existUser.PasswordHash[i]) return Unauthorized("Incorrect username or password!");
             }
 
-            return new UserDto{
+            return new UserVm{
                 username= existUser.UserName,
                 token= _tokenService.CreateToken(existUser)
             };
